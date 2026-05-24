@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "HlXvGu83lb8=",
+  "success": true,
+  "projectFilePath": "C:\\Projetos\\POCs\\kafka-onboarding-dotnet\\KafkaOnboarding\\KafkaOnboarding.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ntits\\.nuget\\packages\\confluent.kafka\\2.14.0\\confluent.kafka.2.14.0.nupkg.sha512",
+    "C:\\Users\\ntits\\.nuget\\packages\\librdkafka.redist\\2.14.0\\librdkafka.redist.2.14.0.nupkg.sha512"
+  ],
+  "logs": []
+}
