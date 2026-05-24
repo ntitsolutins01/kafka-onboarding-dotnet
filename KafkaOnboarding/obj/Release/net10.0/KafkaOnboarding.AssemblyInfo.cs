@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KafkaOnboarding")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d5b190c0660b536ddffa24f0bea41c11d5ebe3d2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d6f63ef9173c6b8c10c240dcc4f313287eb2f500")]
 [assembly: System.Reflection.AssemblyProductAttribute("KafkaOnboarding")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KafkaOnboarding")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

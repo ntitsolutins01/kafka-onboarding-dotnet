@@ -1,30 +1,37 @@
-﻿// Program.cs
-using KafkaOnboarding.Producer;
-using KafkaOnboarding.Consumer;
+﻿using KafkaOnboarding.Producer;
+using Microsoft.Extensions.Logging;
 
-var cts = new CancellationTokenSource();
-Console.CancelKeyPress += (_, e) =>
+// 🎨 Setup de logging
+using var loggerFactory = LoggerFactory.Create(builder =>
 {
-    e.Cancel = true;
-    cts.Cancel();
-};
+    builder.AddSimpleConsole(options =>
+    {
+        options.SingleLine = true;
+        options.TimestampFormat = "HH:mm:ss ";
+    });
+});
 
-var commandLineArgs = Environment.GetCommandLineArgs();
-var mode = commandLineArgs.Length > 1 ? commandLineArgs[1] : "producer";
+// 🧭 Roteamento por argumento de linha de comando
+var mode = args.Length > 0 ? args[0].ToLower() : "producer";
 
-switch (mode.ToLower())
+switch (mode)
 {
     case "producer":
-        var producer = new ThermostatProducer();
+        var producerLogger = loggerFactory.CreateLogger<OnboardingProducer>();
+        var producer = new OnboardingProducer(producerLogger);
         await producer.RunAsync();
         break;
 
-    case "consumer":
-        var consumer = new ThermostatConsumer();
-        consumer.Run(cts.Token);
-        break;
+    // 📌 Reservado pro Passo 3 (Consumer .NET)
+    // case "consumer":
+    //     var consumerLogger = loggerFactory.CreateLogger<OnboardingConsumer>();
+    //     var consumer = new OnboardingConsumer(consumerLogger);
+    //     await consumer.RunAsync();
+    //     break;
 
     default:
-        Console.WriteLine("Uso: dotnet run -- [producer|consumer]");
+        Console.WriteLine($"❌ Unknown mode: {mode}");
+        Console.WriteLine("Usage: dotnet run [producer|consumer]");
+        Environment.Exit(1);
         break;
 }

@@ -1,0 +1,14 @@
+# Subir tudo
+.\scripts\start.ps1
+
+# Rodar producer (em outro terminal)
+.\scripts\producer.ps1 -Rate 20 -Total 1000
+
+# Parar (preservando dados)
+.\scripts\stop.ps1
+
+# Parar e apagar dados
+.\scripts\stop.ps1 -RemoveVolumes
+
+# Reset total (algo travou? roda esse)
+.\scripts\reset.ps1
