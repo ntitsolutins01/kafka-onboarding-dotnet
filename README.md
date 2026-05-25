@@ -8,7 +8,27 @@
 ![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Flink](https://img.shields.io/badge/Apache%20Flink-1.19-E6526F?style=for-the-badge&logo=apacheflink&logoColor=white)
 ![PowerShell](https://img.shields.io/badge/PowerShell-7+-5391FE?style=for-the-badge&logo=powershell&logoColor=white)
+![Tests](https://img.shields.io/badge/Tests-E2E_Guide-success?style=for-the-badge&logo=testinglibrary&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+
+---
+
+## 📑 Sumário
+
+- [Sobre o Projeto](#-sobre-o-projeto)
+- [O que você vai aprender](#-o-que-você-vai-aprender)
+- [Arquitetura do Projeto](#️-arquitetura-do-projeto)
+- [Estrutura do Repositório](#-estrutura-do-repositório)
+- [Pré-requisitos](#-pré-requisitos)
+- [Quick Start](#️-quick-start-3-passos)
+- [Comandos disponíveis](#️-comandos-disponíveis)
+- [🧪 Testes End-to-End](#-testes-end-to-end)
+- [Dashboards e Ferramentas](#-dashboards-e-ferramentas)
+- [Conceitos-Chave](#-conceitos-chave-ilustrados-no-código)
+- [Stream Processing com Flink SQL](#-stream-processing-com-flink-sql)
+- [Roadmap de Estudos](#️-roadmap-de-estudos)
+- [Troubleshooting](#️-troubleshooting)
+- [Referências](#-referências-e-recursos)
 
 ---
 
@@ -79,6 +99,7 @@ kafka-onboarding-dotnet/
 ├── 📄 KafkaOnboarding.csproj      # Projeto .NET 8
 ├── 📄 Program.cs                  # Ponto de entrada — producer / consumer
 ├── 📄 README.md                   # Você está aqui 😊
+├── 📄 TESTING.md                  # 🧪 Roteiro de testes end-to-end
 │
 ├── 📁 scripts/                    # 🆕 Automação PowerShell
 │   ├── start.ps1                  # Sobe infra + valida + cria tópicos
@@ -222,6 +243,39 @@ Se o ambiente ficar inconsistente (containers órfãos, conflito de nomes, volum
 ```
 
 Isso resolve **99% dos problemas** voltando a um estado limpo.
+
+---
+
+## 🧪 Testes End-to-End
+
+Quer validar se tudo está funcionando lindo? Preparei um **roteiro completo de testes** com cenários de happy path, falhas (DLQ), resiliência e inspeção manual de mensagens.
+
+👉 Acesse o guia completo em [**TESTING.md**](./TESTING.md)
+
+**O que você vai encontrar lá:**
+
+- ✅ Setup de 3 terminais para observar o fluxo em tempo real
+- ✅ **Teste 1** — Happy path (fluxo normal)
+- ❌ **Teste 2** — Falha → Dead Letter Queue (DLQ)
+- 🔍 **Teste 3** — Inspeção manual de mensagens
+- 💪 **Teste 4** — Produzir mensagens manualmente
+- 🔥 **Teste 5** — Resiliência (derrubar e subir consumer)
+- 📊 Checklist de validação completo
+
+### ⚡ Quick test
+
+Para um teste rápido em 3 passos:
+
+```powershell
+# Terminal 1 — Consumer
+dotnet run -- consumer
+
+# Terminal 2 — Producer
+.\scripts\producer.ps1 -Rate 10 -Total 50
+
+# Terminal 3 — Monitor de LAG
+kgroups --group onboarding-processor --describe
+```
 
 ---
 
@@ -420,7 +474,7 @@ Feito com 💙 e muito ☕ por **Fábio Muniz**
 ## 📌 Como publicar atualizações no GitHub (PowerShell)
 
 ```powershell
-git add README.md scripts/
-git commit -m "docs: README com scripts PowerShell e Flink"
+git add README.md TESTING.md scripts/
+git commit -m "docs: adiciona guia de testes E2E e atualiza README"
 git push origin main
 ```

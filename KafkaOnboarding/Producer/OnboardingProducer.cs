@@ -25,7 +25,8 @@ public class OnboardingProducer
         _totalEvents = int.Parse(Environment.GetEnvironmentVariable("TOTAL_EVENTS") ?? "100");
     }
 
-    public async Task RunAsync()
+    public async Task RunAsync(CancellationToken cancellationToken = default)
+
     {
         var config = new ProducerConfig
         {
